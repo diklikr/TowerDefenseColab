@@ -4,7 +4,15 @@ public class EnemyHP : MonoBehaviour
 {
     int HP;
     public int startHP;
+    public int damage;
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(CompareTag("Escudo") || CompareTag("Base"))
+        {
+            TakeDamage(damage);
+        }
+    }
     private void Start()
     {
         HP = startHP;
