@@ -1,43 +1,44 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class HP : MonoBehaviour
 {
-    SceneManage sceneManage;
-    public int startHP;
-    int crrhealth;
-    int damage;
+    public SceneManage sceneManage;
+    public int startHP = 1;
+    private int currentHealth;
 
     private void Start()
     {
         ResetHP();
     }
+
     public void ResetHP()
     {
-        crrhealth = startHP;
+        currentHealth = startHP;
     }
-    public void TakeDamage(int damage)
+
+    public void TakeDamage(int incomingDamage)
     {
-        crrhealth = damage - crrhealth;
-        if (crrhealth > 0)
+        // Subtracts incoming damage from current health
+        currentHealth -= incomingDamage;
+        if (currentHealth <= 0)
         {
             Die();
         }
     }
+
     void Die()
     {
-        if(gameObject.CompareTag("Escudo"))
-        gameObject.SetActive(false);
-        else if(gameObject.CompareTag("Base"))
+        // Destroys the shield or triggers game over if the base falls
+        if (gameObject.CompareTag("Escudo"))
         {
-            sceneManage.Lose();
+            Destroy(gameObject);
         }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(CompareTag("Enemy"))
+        else if (gameObject.CompareTag("Base"))
         {
-            TakeDamage(damage);
+            if (sceneManage != null)
+            {
+                sceneManage.Lose();
+            }
         }
     }
 }
