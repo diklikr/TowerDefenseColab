@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52fd4c64c68b36e48b183ce8593ff7a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HouseHP
+  sceneManage: {fileID: 0}
   startHP: 10
 --- !u!1 &295148356
 GameObject:
@@ -787,6 +788,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1105575829 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7144191992517988316, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
+  m_PrefabInstance: {fileID: 4666855011703117176}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1228009259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5998906346302829796, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
@@ -839,6 +845,33 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1228009269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228009259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74616e9dc23069b4b96f6b0f4cf152db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuildSystem
+  wallPrefab: {fileID: 8087463993063650893, guid: 4d08130220a4c094285e6f9b979d32bb, type: 3}
+  buildPoint: {fileID: 1105575829}
+--- !u!114 &1228009270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228009259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba6a6ab2bbcd8c442a2ed88e254b90df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSanity
+  maxSanity: 10
 --- !u!1001 &2007211244311340168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -962,10 +995,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5998906346302829796, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1228009268}
+    - targetCorrespondingSourceObject: {fileID: 5998906346302829796, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1228009267}
     - targetCorrespondingSourceObject: {fileID: 5998906346302829796, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1228009268}
+      addedObject: {fileID: 1228009270}
+    - targetCorrespondingSourceObject: {fileID: 5998906346302829796, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1228009269}
   m_SourcePrefab: {fileID: 100100000, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
 --- !u!1001 &5716193869452303162
 PrefabInstance:
