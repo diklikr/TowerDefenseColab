@@ -787,6 +787,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1228009259 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5998906346302829796, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
+  m_PrefabInstance: {fileID: 4666855011703117176}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1228009267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228009259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081cba3d3f6b9804baa091a2f711fc96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
+  speed: 6
+  jumpHeight: 1.8
+  gravity: -9.81
+  mouseSensitivity: 0.7
+  cameraTransform: {fileID: 0}
+  groundCheck: {fileID: 295148360}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!143 &1228009268
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228009259}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5000002
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2007211244311340168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -896,6 +948,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4432918467031299068, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 5998906346302829796, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
       propertyPath: m_Name
       value: Player
@@ -903,7 +959,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5998906346302829796, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1228009267}
+    - targetCorrespondingSourceObject: {fileID: 5998906346302829796, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1228009268}
   m_SourcePrefab: {fileID: 100100000, guid: 90027fba22d95c245adc85d22dde0606, type: 3}
 --- !u!1001 &5716193869452303162
 PrefabInstance:

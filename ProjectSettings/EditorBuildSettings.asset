@@ -18,5 +18,6 @@ EditorBuildSettings:
     path: Assets/Scenes/GameOver.unity
     guid: 0b9dcc04dbb74cc47a16566cba74dc9a
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: e2f475890aaf1ea42a581f5dbd2ab6d2, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
