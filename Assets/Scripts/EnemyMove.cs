@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -10,7 +10,11 @@ public class EnemyMove : MonoBehaviour
 
     void Start()
     {
-        target = escudo;
+        if (house == null)
+        {
+            house = GameObject.FindGameObjectWithTag("Base");
+        }
+        ElegirObjetivo();
     }
 
     void Update()
@@ -18,15 +22,54 @@ public class EnemyMove : MonoBehaviour
         if (target == null)
         {
             ElegirObjetivo();
-            return;
+            if (target == null) return;
         }
 
         // Moverse hacia el objetivo
-        Vector3 dir = (target.transform.position - transform.position).normalized;
-        transform.position += dir * speed * Time.deltaTime;
+        Vector3 targetPos = target.transform.position;
+        targetPos.y = transform.position.y; // Mantener la misma altura para evitar inclinaciones
+        
+        Vector3 dir = (targetPos - transform.position).normalized;
+        Vector3 moveDir = dir;
 
-        // Verificar si lleg�
-        if (Vector3.Distance(transform.position, target.transform.position) < 0.1f)
+        // Evitado de obstáculos simple usando raycast
+        RaycastHit hit;
+        float rayLength = 2.5f;
+
+        // Proyectar un rayo hacia adelante
+        if (Physics.Raycast(transform.position, transform.forward, out hit, rayLength))
+        {
+            // Si el obstáculo no es nuestro objetivo directo y es un escudo/muro u otro obstáculo
+            if (hit.collider.gameObject != target)
+            {
+                // Esquivar apartándose de la normal del impacto
+                Vector3 hitNormal = hit.normal;
+                hitNormal.y = 0f; // Evitar movimientos verticales
+
+                // Dirección de evasión
+                moveDir = (dir + hitNormal * 2.5f).normalized;
+
+                // Rotar suavemente hacia la dirección de evasión
+                if (moveDir != Vector3.zero)
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir), Time.deltaTime * 5f);
+                }
+            }
+        }
+        else
+        {
+            // Rotar suavemente hacia el objetivo
+            if (dir != Vector3.zero)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5f);
+            }
+        }
+
+        // Desplazar al enemigo en la dirección final calculada
+        transform.position += moveDir * speed * Time.deltaTime;
+
+        // Verificar si llegó
+        if (Vector3.Distance(transform.position, target.transform.position) < 0.2f)
         {
             target = null;
         }
@@ -34,6 +77,8 @@ public class EnemyMove : MonoBehaviour
 
     void ElegirObjetivo()
     {
+        if (house == null) return;
+
         float distCasa = Vector3.Distance(transform.position, house.transform.position);
         GameObject escudoCercano = BuscarEscudo();
 

@@ -1,18 +1,18 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class LG_PlayerSanity : MonoBehaviour
 {
-    [Header("--- Parámetros de Cordura ---")]
+    [Header("--- ParÃ¡metros de Cordura ---")]
     [SerializeField] private float maxSanity = 100f;
     [SerializeField] private float currentSanity;
 
-    [Header("--- Drenaje y Regeneración ---")]
+    [Header("--- Drenaje y RegeneraciÃ³n ---")]
     [Tooltip("Drenaje pasivo por segundo al explorar/estar fuera de la base")]
     [SerializeField] private float explorationDrainRate = 3f;
-    [Tooltip("Regeneración por segundo al estar en la base/zona segura")]
+    [Tooltip("RegeneraciÃ³n por segundo al estar en la base/zona segura")]
     [SerializeField] private float safeZoneRegenRate = 8f;
 
     [Header("--- Estados ---")]
@@ -27,9 +27,9 @@ public class LG_PlayerSanity : MonoBehaviour
     [SerializeField] private Color criticalColor = new Color(0.9f, 0.1f, 0.1f);
 
     [Header("--- Referencias de Jugador ---")]
-    [SerializeField] private PlayerMove playerMovement; // Para aplicar penalización de velocidad
+    [SerializeField] private PlayerMove playerMovement; // Para aplicar penalizaciÃ³n de velocidad
 
-    // Eventos por si quieres conectar SFX o shaders de distorsión
+    // Eventos por si quieres conectar SFX o shaders de distorsiÃ³n
     public event Action<float> OnSanityChanged;
     public event Action OnSanityZero;
     public event Action OnSanityRestored;
@@ -54,7 +54,7 @@ public class LG_PlayerSanity : MonoBehaviour
     {
         if (isInSafeZone)
         {
-            // Regeneración en zona segura
+            // RegeneraciÃ³n en zona segura
             if (currentSanity < maxSanity)
             {
                 currentSanity += safeZoneRegenRate * Time.deltaTime;
@@ -68,7 +68,7 @@ public class LG_PlayerSanity : MonoBehaviour
         }
         else
         {
-            // Drenaje por exploración continua
+            // Drenaje por exploraciÃ³n continua
             if (currentSanity > 0)
             {
                 currentSanity -= explorationDrainRate * Time.deltaTime;
@@ -101,16 +101,16 @@ public class LG_PlayerSanity : MonoBehaviour
     }
 
     /// <summary>
-    /// Penalización extrema según GDD (Ralentización crítica / bloqueo)
+    /// PenalizaciÃ³n extrema segÃºn GDD (RalentizaciÃ³n crÃ­tica / bloqueo)
     /// </summary>
     private void ApplyPenalty()
     {
         isPenalized = true;
         OnSanityZero?.Invoke();
-        Debug.LogWarning("¡CORDURA EN 0! Penalización extrema activada.");
+        Debug.LogWarning("Â¡CORDURA EN 0! PenalizaciÃ³n extrema activada.");
 
-        // Si PlayerMove tiene control de velocidad, aquí lo limitas
-        // Ejemplo: playerMovement.SetSpeedModifier(0.3f); 
+        // Si PlayerMove tiene control de velocidad, aquÃ­ lo limitas
+        if (playerMovement != null) playerMovement.SetSpeedModifier(0.3f); 
     }
 
     private void RemovePenalty()
@@ -119,7 +119,7 @@ public class LG_PlayerSanity : MonoBehaviour
         OnSanityRestored?.Invoke();
         Debug.Log("Cordura recuperada por encima del umbral.");
 
-        // Restaurar velocidad: playerMovement.SetSpeedModifier(1f);
+        if (playerMovement != null) playerMovement.ResetSpeedModifier();
     }
 
     private void UpdateUI()
@@ -142,7 +142,7 @@ public class LG_PlayerSanity : MonoBehaviour
         }
     }
 
-    // Detección de Base/Pilar (Zona Segura)
+    // DetecciÃ³n de Base/Pilar (Zona Segura)
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("SafeZone") || other.CompareTag("House"))
@@ -160,3 +160,4 @@ public class LG_PlayerSanity : MonoBehaviour
     }
 
 }
+
