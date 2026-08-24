@@ -16,6 +16,12 @@ public class HP : MonoBehaviour
         currentHealth = startHP;
     }
 
+    public void SetMaxAndCurrentHP(int hp)
+    {
+        startHP = hp;
+        currentHealth = hp;
+    }
+
     public void TakeDamage(int incomingDamage)
     {
         // Subtracts incoming damage from current health

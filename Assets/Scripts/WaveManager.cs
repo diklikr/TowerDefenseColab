@@ -11,11 +11,16 @@ public class WaveManager : MonoBehaviour
     public int enemiesPerWaveIncrease = 2;
     public int totalWaves = 5;
     public float cooldownBetweenWaves = 10f;
+    public SceneManage sceneManage;
 
     private int currentWave = 0;
 
     void Start()
     {
+        if (sceneManage == null)
+        {
+            sceneManage = FindObjectOfType<SceneManage>();
+        }
         StartCoroutine(HandleWaves());
     }
 
@@ -39,6 +44,21 @@ public class WaveManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(cooldownBetweenWaves);
             }
+        }
+
+        // Wait until all remaining enemies are destroyed to trigger victory
+        while (FindObjectsOfType<EnemyHP>().Length > 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+        }
+
+        if (sceneManage != null)
+        {
+            sceneManage.Win();
+        }
+        else
+        {
+            Debug.LogError("SceneManage no asignado ni encontrado en la escena. No se puede cargar pantalla de victoria.");
         }
     }
 

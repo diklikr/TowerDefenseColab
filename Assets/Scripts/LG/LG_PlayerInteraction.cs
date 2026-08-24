@@ -14,7 +14,8 @@ public class LG_PlayerInteraction : MonoBehaviour
     {
         if (currentNodeInRange != null)
         {
-            if (Input.GetKeyDown(interactKey))
+            // Interact Key (E) or Gamepad Button (X / Cuadrado) -> JoystickButton2
+            if (Input.GetKeyDown(interactKey) || Input.GetKeyDown(KeyCode.JoystickButton2))
             {
                 // Extraer el recurso y sumarlo al manager
                 int amount = currentNodeInRange.Harvest();

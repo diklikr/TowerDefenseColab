@@ -26,10 +26,10 @@ public class EnemyHP : MonoBehaviour
         // This validates if the enemy hits the player to drain sanity
         else if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerSanity playerSanity = collision.gameObject.GetComponent<PlayerSanity>();
+            LG_PlayerSanity playerSanity = collision.gameObject.GetComponent<LG_PlayerSanity>();
             if (playerSanity != null)
             {
-                playerSanity.DrainSanityTemporary(2);
+                playerSanity.TakeSanityDamage(2f);
             }
             TakeDamage(damage);
         }

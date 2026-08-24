@@ -12,6 +12,10 @@ public class PlayerMove : MonoBehaviour
     public float groundDistance = 0.35f;
     public LayerMask groundMask;
 
+    [Header("--- Sprint & Modifiers ---")]
+    public float sprintMultiplier = 1.6f;
+    private float speedModifier = 1f;
+
     CharacterController controller;
     Vector3 velocity;
     float pitch;
@@ -21,6 +25,16 @@ public class PlayerMove : MonoBehaviour
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void SetSpeedModifier(float modifier)
+    {
+        speedModifier = modifier;
+    }
+
+    public void ResetSpeedModifier()
+    {
+        speedModifier = 1f;
     }
 
     void Update()
@@ -37,9 +51,17 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKey(KeyCode.D)) x = 1f;
         }
 
+        float currentSpeed = speed;
+        // Sprint if LeftShift or JoystickButton8 (L3) is pressed (unless heavily penalized by sanity 0)
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.JoystickButton8)) && speedModifier > 0.5f)
+        {
+            currentSpeed *= sprintMultiplier;
+        }
+        currentSpeed *= speedModifier;
+
         Vector3 input = Vector3.ClampMagnitude(new Vector3(x, 0f, z), 1f);
         Vector3 move = transform.right * input.x + transform.forward * input.z;
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move(move * currentSpeed * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
