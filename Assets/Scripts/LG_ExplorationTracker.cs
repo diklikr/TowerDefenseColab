@@ -1,10 +1,10 @@
 using UnityEngine;
 using TMPro;
 
-public class ExplorationTracker : MonoBehaviour
+public class LG_ExplorationTracker : MonoBehaviour
 {
     [Header("--- Referencias ---")]
-    public GridMapGenerator mapGenerator;
+    public LG_GridMapGenerator mapGenerator;
     public Transform playerTransform;
     public TextMeshProUGUI explorationTextUI; // Texto para mostrar el % explorado en pantalla
 
@@ -22,7 +22,7 @@ public class ExplorationTracker : MonoBehaviour
 
         if (mapGenerator == null)
         {
-            mapGenerator = FindObjectOfType<GridMapGenerator>();
+            mapGenerator = FindObjectOfType<LG_GridMapGenerator>();
         }
 
         Invoke("InitializeTracker", 0.5f); // Esperar a que el mapa se genere
@@ -43,7 +43,7 @@ public class ExplorationTracker : MonoBehaviour
         {
             for (int z = 0; z < h; z++)
             {
-                if (cellGrid[x, z] != GridMapGenerator.CellType.Obstacle)
+                if (cellGrid[x, z] != LG_GridMapGenerator.CellType.Obstacle)
                 {
                     totalWalkableCells++;
                 }
@@ -71,7 +71,7 @@ public class ExplorationTracker : MonoBehaviour
         var cellGrid = mapGenerator.GetCellGrid();
 
         // Si la celda es transitable y no ha sido explorada aún
-        if (cellGrid[playerGridX, playerGridZ] != GridMapGenerator.CellType.Obstacle && !exploredGrid[playerGridX, playerGridZ])
+        if (cellGrid[playerGridX, playerGridZ] != LG_GridMapGenerator.CellType.Obstacle && !exploredGrid[playerGridX, playerGridZ])
         {
             exploredGrid[playerGridX, playerGridZ] = true;
             exploredCells++;

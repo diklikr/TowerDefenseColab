@@ -52,8 +52,8 @@ public class PlayerMove : MonoBehaviour
         }
 
         float currentSpeed = speed;
-        // Sprint if LeftShift is pressed (unless heavily penalized by sanity 0)
-        if (Input.GetKey(KeyCode.LeftShift) && speedModifier > 0.5f)
+        // Sprint if LeftShift or JoystickButton8 (L3) is pressed (unless heavily penalized by sanity 0)
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.JoystickButton8)) && speedModifier > 0.5f)
         {
             currentSpeed *= sprintMultiplier;
         }

@@ -3,7 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class SceneManage : MonoBehaviour
 {
-    
+    private void Update()
+    {
+        // Tecla [ Esc ] o Botón Start del mando (JoystickButton7) abre el menú principal
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
+        {
+            StartMenu();
+        }
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene("GameScene");

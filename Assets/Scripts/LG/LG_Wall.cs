@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(HP))]
-public class Wall : MonoBehaviour
+public class LG_Wall : MonoBehaviour
 {
     [Header("--- Estado del Muro ---")]
     public int level = 1;

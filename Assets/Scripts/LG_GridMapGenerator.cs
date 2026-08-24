@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridMapGenerator : MonoBehaviour
+public class LG_GridMapGenerator : MonoBehaviour
 {
     [Header("--- Dimensiones del Grid ---")]
     public int width = 15;

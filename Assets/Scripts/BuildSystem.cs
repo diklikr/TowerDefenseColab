@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BuildSystem : MonoBehaviour
 {
-    [Header("--- Configuración de Construcción ---")]
+    [Header("--- ConfiguraciÃ³n de ConstrucciÃ³n ---")]
     public GameObject wallPrefab;
     public Transform buildPoint;
     public float buildDistance = 5f;
@@ -18,14 +18,14 @@ public class BuildSystem : MonoBehaviour
 
     void Update()
     {
-        // Tecla [ B ] para construir nuevo muro
-        if (Input.GetKeyDown(KeyCode.B))
+        // Tecla [ B ] o BotÃ³n A / Cruz del mando (JoystickButton0) para construir nuevo muro
+        if (Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton0))
         {
             TryBuildNewWall();
         }
 
-        // Tecla [ U ] para mejorar el muro al que estás apuntando
-        if (Input.GetKeyDown(KeyCode.U))
+        // Tecla [ U ] o BotÃ³n Y / TriÃ¡ngulo del mando (JoystickButton3) para mejorar el muro al que estÃ¡s apuntando
+        if (Input.GetKeyDown(KeyCode.U) || Input.GetKeyDown(KeyCode.JoystickButton3))
         {
             TryUpgradeLookedWall();
         }
@@ -53,7 +53,7 @@ public class BuildSystem : MonoBehaviour
         {
             GameObject hitObj = actualHit.collider.gameObject;
             
-            // Buscar hacia arriba de forma recursiva en la jerarquía para ver si algún ancestro tiene el tag "Escudo"
+            // Buscar hacia arriba de forma recursiva en la jerarquÃ­a para ver si algÃºn ancestro tiene el tag "Escudo"
             Transform current = hitObj.transform;
             GameObject wallRoot = null;
             while (current != null)
@@ -66,14 +66,14 @@ public class BuildSystem : MonoBehaviour
                 current = current.parent;
             }
 
-            // Si encontramos un objeto con el tag "Escudo" en la jerarquía
+            // Si encontramos un objeto con el tag "Escudo" en la jerarquÃ­a
             if (wallRoot != null)
             {
-                // Buscar componente Wall en el objeto raíz del muro
-                Wall wallComponent = wallRoot.GetComponent<Wall>();
+                // Buscar componente LG_Wall en el objeto raÃ­z del muro
+                LG_Wall wallComponent = wallRoot.GetComponent<LG_Wall>();
                 if (wallComponent == null)
                 {
-                    wallComponent = wallRoot.AddComponent<Wall>();
+                    wallComponent = wallRoot.AddComponent<LG_Wall>();
                     wallComponent.level = 1;
                 }
 
@@ -81,26 +81,26 @@ public class BuildSystem : MonoBehaviour
             }
             else
             {
-                // Imprimir el nombre y el tag del objeto impactado para facilitar la depuración
-                Debug.LogWarning($"No estás apuntando a un muro para mejorar. Impactaste a: '{hitObj.name}' (Tag: '{hitObj.tag}').");
+                // Imprimir el nombre y el tag del objeto impactado para facilitar la depuraciÃ³n
+                Debug.LogWarning($"No estÃ¡s apuntando a un muro para mejorar. Impactaste a: '{hitObj.name}' (Tag: '{hitObj.tag}').");
             }
         }
         else
         {
-            Debug.LogWarning("No se detectó ningún objeto al intentar mejorar (fuera de rango o sin colisión).");
+            Debug.LogWarning("No se detectÃ³ ningÃºn objeto al intentar mejorar (fuera de rango o sin colisiÃ³n).");
         }
     }
 
-    void TryUpgradeWall(Wall wall)
+    void TryUpgradeWall(LG_Wall LG_Wall)
     {
-        if (wall.level == 1)
+        if (LG_Wall.level == 1)
         {
             // Nivel 2: Costo 2 Lodo, 1 Piedra
             if (LG_ResourceManager.Instance != null)
             {
                 if (LG_ResourceManager.Instance.ConsumeResources(0, 1, 2)) // Madera, Piedra, Lodo
                 {
-                    wall.UpgradeToLevel(2);
+                    LG_Wall.UpgradeToLevel(2);
                 }
                 else
                 {
@@ -108,14 +108,14 @@ public class BuildSystem : MonoBehaviour
                 }
             }
         }
-        else if (wall.level == 2)
+        else if (LG_Wall.level == 2)
         {
             // Nivel 3: Costo 1 Piedra, 1 Lodo
             if (LG_ResourceManager.Instance != null)
             {
                 if (LG_ResourceManager.Instance.ConsumeResources(0, 1, 1)) // Madera, Piedra, Lodo
                 {
-                    wall.UpgradeToLevel(3);
+                    LG_Wall.UpgradeToLevel(3);
                 }
                 else
                 {
@@ -125,7 +125,7 @@ public class BuildSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("El muro ya está al nivel máximo (Nivel 3).");
+            Debug.Log("El muro ya estÃ¡ al nivel mÃ¡ximo (Nivel 3).");
         }
     }
 
@@ -141,10 +141,10 @@ public class BuildSystem : MonoBehaviour
                     GameObject newWall = Instantiate(wallPrefab, buildPoint.position, buildPoint.rotation);
                     newWall.tag = "Escudo"; // Asegurar que tenga el tag correspondiente
 
-                    Wall wallComp = newWall.GetComponent<Wall>();
+                    LG_Wall wallComp = newWall.GetComponent<LG_Wall>();
                     if (wallComp == null)
                     {
-                        wallComp = newWall.AddComponent<Wall>();
+                        wallComp = newWall.AddComponent<LG_Wall>();
                     }
                     wallComp.level = 1;
 
