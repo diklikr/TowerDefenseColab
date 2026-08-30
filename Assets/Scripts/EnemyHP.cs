@@ -2,13 +2,21 @@ using UnityEngine;
 
 public class EnemyHP : MonoBehaviour
 {
+    public static int enemigosVivos = 0;   // contador compartido por todos los enemigos
+
     public int startHP = 1;
     public int damage = 1;
-    private int currentHP;
+    [SerializeField] private int currentHP;
 
     private void Start()
     {
         currentHP = startHP;
+        enemigosVivos++;
+    }
+
+    private void OnDestroy()
+    {
+        enemigosVivos--;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -33,6 +41,18 @@ public class EnemyHP : MonoBehaviour
             }
             TakeDamage(damage);
         }
+    }
+
+    //Daño directo por cercanía, lo llama EnemigoIA
+    public void Impactar(GameObject objetivo)
+    {
+        HP vida = objetivo.GetComponent<HP>();
+        if (vida == null) vida = objetivo.GetComponentInParent<HP>();
+
+        if (vida != null)
+            vida.TakeDamage(damage);
+
+        TakeDamage(damage);
     }
 
     public void TakeDamage(int incomingDamage)

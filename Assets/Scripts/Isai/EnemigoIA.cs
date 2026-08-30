@@ -4,11 +4,13 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemigoIA : MonoBehaviour
 {
+    [Header("Objetivos")]
     public Transform casa;
 
-    [Header("Rangos persecución")]
-    public float rangoDeteccion = 8f;   // desde aquí persigue al jugador
-    public float rangoPerdida = 14f;   // aquí lo suelta y vuelve al muro
+    [Header("Rangos")]
+    public float rangoDeteccion;   // desde aquí persigue al jugador
+    public float rangoPerdida;   // aquí lo suelta y vuelve al muro
+    public float distanciaImpacto = 0.8f;
 
     NavMeshAgent agente;
     Transform jugador;
@@ -22,12 +24,12 @@ public class EnemigoIA : MonoBehaviour
 
         if (casa == null)
         {
-            GameObject bas = GameObject.FindGameObjectWithTag("Base");
-            if (bas != null) casa = bas.transform;
+            GameObject b = GameObject.FindGameObjectWithTag("Base");
+            if (b != null) casa = b.transform;
         }
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null) jugador = player.transform;
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        if (p != null) jugador = p.transform;
 
         objetivo = BuscarEstructura();
     }
@@ -35,16 +37,22 @@ public class EnemigoIA : MonoBehaviour
     void Update()
     {
         ElegirObjetivo();
+        if (objetivo == null) return;
 
-        if (objetivo != null)
-            agente.SetDestination(objetivo.position);
+        if (objetivo != jugador && Distancia(objetivo) <= distanciaImpacto)
+        {
+            GetComponent<EnemyHP>().Impactar(objetivo.gameObject);
+            return;
+        }
+
+        agente.SetDestination(PuntoDestino(objetivo));
     }
 
     void ElegirObjetivo()
     {
         float distJugador = (jugador == null) ? Mathf.Infinity : Distancia(jugador);
 
-        // Ya lo estoy persiguiendo: solo reviso si se escapó
+        //Cuando lo persigue al jugador detecta si salió del rango
         if (objetivo == jugador && jugador != null)
         {
             if (distJugador > rangoPerdida)
@@ -52,14 +60,14 @@ public class EnemigoIA : MonoBehaviour
             return;
         }
 
-        // Se acercó demasiado: lo persigo
+        //Detecta si el jugador esta dentro del rango
         if (distJugador < rangoDeteccion)
         {
             objetivo = jugador;
             return;
         }
 
-        // Voy por estructuras: refresco el objetivo cada medio segundo
+        //Busca un muro disponible para atacar
         if (objetivo == null || Time.time >= proximaBusqueda)
         {
             proximaBusqueda = Time.time + 0.5f;
@@ -90,6 +98,11 @@ public class EnemigoIA : MonoBehaviour
         Collider col = t.GetComponent<Collider>();
         Vector3 punto = (col != null) ? col.ClosestPoint(transform.position) : t.position;
         return Vector3.Distance(transform.position, punto);
+    }
+    Vector3 PuntoDestino(Transform t)
+    {
+        Collider col = t.GetComponent<Collider>();
+        return (col != null) ? col.ClosestPoint(transform.position) : t.position;
     }
 
     void OnDrawGizmosSelected()

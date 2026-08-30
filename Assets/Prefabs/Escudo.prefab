@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5446347669617803527}
   - component: {fileID: 7600517832044168590}
   - component: {fileID: 1294033169164222415}
-  - component: {fileID: 1580204268679306222}
   - component: {fileID: 4781319213818631301}
+  - component: {fileID: 3404994469594871212}
   m_Layer: 0
   m_Name: Escudo
   m_TagString: Escudo
@@ -92,7 +92,21 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1580204268679306222
+--- !u!114 &4781319213818631301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087463993063650893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52fd4c64c68b36e48b183ce8593ff7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HP
+  sceneManage: {fileID: 0}
+  startHP: 3
+--- !u!65 &3404994469594871212
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,16 +127,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4781319213818631301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8087463993063650893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52fd4c64c68b36e48b183ce8593ff7a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HP
-  startHP: 3

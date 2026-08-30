@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -10,13 +11,18 @@ public class WaveManager : MonoBehaviour
     public int initialEnemies = 3;
     public int enemiesPerWaveIncrease = 2;
     public int totalWaves = 5;
-    public float cooldownBetweenWaves = 10f;
     public SceneManage sceneManage;
+
+    [Header("Tiempos")]
+    public float intervaloSpawn = 0.5f;      //segundos entre enemigo y enemigo
+    public float respiroEntreOleadas = 3f;   //tiempo de descanso tras limpiar una oleada
 
     private int currentWave = 0;
 
     void Start()
     {
+        EnemyHP.enemigosVivos = 0;   //limpia el contador al empezar la escena
+
         if (sceneManage == null)
         {
             sceneManage = FindObjectOfType<SceneManage>();
@@ -24,32 +30,33 @@ public class WaveManager : MonoBehaviour
         StartCoroutine(HandleWaves());
     }
 
-    // This handles the wave progression and cooldown times
     private IEnumerator HandleWaves()
     {
         while (currentWave < totalWaves)
         {
             int enemiesToSpawn = initialEnemies + (currentWave * enemiesPerWaveIncrease);
 
-            // This spawns the required number of enemies for the current wave
+            //Spawnea todos los enemigos de la oleada
             for (int i = 0; i < enemiesToSpawn; i++)
             {
                 SpawnEnemy();
+                yield return new WaitForSeconds(intervaloSpawn);
+            }
+            yield return null;
+
+            //Espera a que el jugador limpie la oleada
+            while (EnemyHP.enemigosVivos > 0)
+            {
                 yield return new WaitForSeconds(0.5f);
             }
 
             currentWave++;
 
+            //Respiro para construir muros antes de la siguiente
             if (currentWave < totalWaves)
             {
-                yield return new WaitForSeconds(cooldownBetweenWaves);
+                yield return new WaitForSeconds(respiroEntreOleadas);
             }
-        }
-
-        // Wait until all remaining enemies are destroyed to trigger victory
-        while (FindObjectsOfType<EnemyHP>().Length > 0)
-        {
-            yield return new WaitForSeconds(1.0f);
         }
 
         if (sceneManage != null)
@@ -62,12 +69,21 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    // This instantiates an enemy at a random spawn point
+    //Instancia un enemigo en un punto de spawn aleatorio
     private void SpawnEnemy()
     {
         if (spawnPoints.Length == 0) return;
 
         int randomIndex = Random.Range(0, spawnPoints.Length);
-        Instantiate(enemyPrefab, spawnPoints[randomIndex].position, spawnPoints[randomIndex].rotation);
+        Vector3 posicion = spawnPoints[randomIndex].position;
+
+        //Ajusta la posición al NavMesh
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(posicion, out hit, 5f, NavMesh.AllAreas))
+        {
+            posicion = hit.position;
+        }
+
+        Instantiate(enemyPrefab, posicion, spawnPoints[randomIndex].rotation);
     }
 }

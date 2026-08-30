@@ -4,6 +4,8 @@ public class HP : MonoBehaviour
 {
     public SceneManage sceneManage;
     public int startHP = 1;
+    
+    [SerializeField] 
     private int currentHealth;
 
     private void Start()
@@ -34,17 +36,12 @@ public class HP : MonoBehaviour
 
     void Die()
     {
-        // Destroys the shield or triggers game over if the base falls
-        if (gameObject.CompareTag("Escudo"))
+        //Si la base se destruye, lanza el gameover antes de destruirse
+        if (gameObject.CompareTag("Base") && sceneManage != null)
         {
-            Destroy(gameObject);
+            sceneManage.Lose();
         }
-        else if (gameObject.CompareTag("Base"))
-        {
-            if (sceneManage != null)
-            {
-                sceneManage.Lose();
-            }
-        }
+
+        Destroy(gameObject);
     }
 }
