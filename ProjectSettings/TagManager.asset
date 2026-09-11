@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Escudo
   - Enemy
-  - Base
   - House
   layers:
   - Default

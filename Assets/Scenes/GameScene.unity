@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &22805999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4619876587886553987, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
+  m_PrefabInstance: {fileID: 5162823647704724213}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &29026835
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1072,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8649394707227262406, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
   m_PrefabInstance: {fileID: 5162823647704724213}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &396878586
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22805999}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 10
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.0000023841858, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,7 +2407,7 @@ MonoBehaviour:
   jumpHeight: 1.8
   gravity: -9.81
   mouseSensitivity: 0.7
-  cameraTransform: {fileID: 0}
+  cameraTransform: {fileID: 330585546}
   groundCheck: {fileID: 295148360}
   groundDistance: 0.4
   groundMask:
@@ -2442,7 +2470,7 @@ MonoBehaviour:
   maxSanity: 100
   currentSanity: 0
   explorationDrainRate: 3
-  safeZoneRegenRate: 8
+  safeZoneRegenRate: 20
   isInSafeZone: 0
   isPenalized: 0
   sanitySlider: {fileID: 654244370}
@@ -4695,6 +4723,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1408344756910766377, guid: 8da7ef31405b1f64c8ea36b9baaba988, type: 3}
+      propertyPath: startHP
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1408344756910766377, guid: 8da7ef31405b1f64c8ea36b9baaba988, type: 3}
+      propertyPath: sceneManage
+      value: 
+      objectReference: {fileID: 601447945}
     - target: {fileID: 4744664450862507247, guid: 8da7ef31405b1f64c8ea36b9baaba988, type: 3}
       propertyPath: m_Name
       value: house
@@ -4705,7 +4741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744664450862507247, guid: 8da7ef31405b1f64c8ea36b9baaba988, type: 3}
       propertyPath: m_TagString
-      value: Base
+      value: House
       objectReference: {fileID: 0}
     - target: {fileID: 5573605449476825863, guid: 8da7ef31405b1f64c8ea36b9baaba988, type: 3}
       propertyPath: m_Size.x
@@ -4871,9 +4907,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1353872811}
     m_Modifications:
+    - target: {fileID: 469823661545892282, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7475c0152fb3fbb48a312d226cc846bb, type: 2}
     - target: {fileID: 4619876587886553987, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
       propertyPath: m_Name
       value: Mud
+      objectReference: {fileID: 0}
+    - target: {fileID: 5625936486120959519, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 8649394707227262406, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649394707227262406, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649394707227262406, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8649394707227262406, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4881,7 +4937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8649394707227262406, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.75
+      value: -3.474
       objectReference: {fileID: 0}
     - target: {fileID: 8649394707227262406, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4915,10 +4971,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5906662605764109486, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4619876587886553987, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 396878586}
   m_SourcePrefab: {fileID: 100100000, guid: aadc4169d6a20f1428bcb073f59255a7, type: 3}
 --- !u!1001 &5716193869452303162
 PrefabInstance:
@@ -5015,7 +5075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2043447062753864307, guid: 512050b108213724293ee19c4a6e380f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.71
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 2043447062753864307, guid: 512050b108213724293ee19c4a6e380f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5053,6 +5113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stone
       objectReference: {fileID: 0}
+    - target: {fileID: 8759013706503305279, guid: 512050b108213724293ee19c4a6e380f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6d9686c8c0fbd254bac40f924a72b0b2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

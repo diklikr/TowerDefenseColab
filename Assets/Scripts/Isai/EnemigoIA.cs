@@ -24,7 +24,7 @@ public class EnemigoIA : MonoBehaviour
 
         if (casa == null)
         {
-            GameObject b = GameObject.FindGameObjectWithTag("Base");
+            GameObject b = GameObject.FindGameObjectWithTag("House");
             if (b != null) casa = b.transform;
         }
 

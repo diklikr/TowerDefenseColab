@@ -22,7 +22,7 @@ public class EnemyHP : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // This validates if the enemy hits a shield or the base
-        if (collision.gameObject.CompareTag("Escudo") || collision.gameObject.CompareTag("Base"))
+        if (collision.gameObject.CompareTag("Escudo") || collision.gameObject.CompareTag("House"))
         {
             HP targetHealth = collision.gameObject.GetComponent<HP>();
             if (targetHealth != null)
@@ -37,7 +37,7 @@ public class EnemyHP : MonoBehaviour
             LG_PlayerSanity playerSanity = collision.gameObject.GetComponent<LG_PlayerSanity>();
             if (playerSanity != null)
             {
-                playerSanity.TakeSanityDamage(2f);
+                playerSanity.TakeSanityDamage(4f);
             }
             TakeDamage(damage);
         }
