@@ -37,7 +37,7 @@ public class EnemyHP : MonoBehaviour
             LG_PlayerSanity playerSanity = collision.gameObject.GetComponent<LG_PlayerSanity>();
             if (playerSanity != null)
             {
-                playerSanity.TakeSanityDamage(4f);
+                playerSanity.TakeSanityDamage(8f);
             }
             TakeDamage(damage);
         }

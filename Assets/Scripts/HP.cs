@@ -11,6 +11,10 @@ public class HP : MonoBehaviour
     private void Start()
     {
         ResetHP();
+        if (sceneManage == null)
+        {
+            sceneManage = FindAnyObjectByType<SceneManage>();
+        }
     }
 
     public void ResetHP()

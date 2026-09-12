@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemigoIA : MonoBehaviour
+public class Enememy : MonoBehaviour
 {
     [Header("Objetivos")]
     public Transform casa;

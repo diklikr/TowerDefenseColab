@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 public class WaveManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class WaveManager : MonoBehaviour
     public float intervaloSpawn = 0.5f;      //segundos entre enemigo y enemigo
     public float respiroEntreOleadas = 3f;   //tiempo de descanso tras limpiar una oleada
 
+    [SerializeField]
     private int currentWave = 0;
 
     void Start()
@@ -25,7 +27,7 @@ public class WaveManager : MonoBehaviour
 
         if (sceneManage == null)
         {
-            sceneManage = FindObjectOfType<SceneManage>();
+            sceneManage = FindAnyObjectByType<SceneManage>();
         }
         StartCoroutine(HandleWaves());
     }
@@ -47,25 +49,22 @@ public class WaveManager : MonoBehaviour
             //Espera a que el jugador limpie la oleada
             while (EnemyHP.enemigosVivos > 0)
             {
-                yield return new WaitForSeconds(0.5f);
+                //yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(respiroEntreOleadas);
             }
 
             currentWave++;
 
             //Respiro para construir muros antes de la siguiente
-            if (currentWave < totalWaves)
+            /*if (currentWave < totalWaves)
             {
                 yield return new WaitForSeconds(respiroEntreOleadas);
-            }
+            }*/
         }
 
         if (sceneManage != null)
         {
             sceneManage.Win();
-        }
-        else
-        {
-            Debug.LogError("SceneManage no asignado ni encontrado en la escena. No se puede cargar pantalla de victoria.");
         }
     }
 
