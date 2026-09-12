@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Escudo
   - Enemy
-  - House
+  - Base
   layers:
   - Default
   - TransparentFX

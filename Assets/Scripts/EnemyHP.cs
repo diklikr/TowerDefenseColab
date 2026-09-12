@@ -22,7 +22,7 @@ public class EnemyHP : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // This validates if the enemy hits a shield or the base
-        if (collision.gameObject.CompareTag("Escudo") || collision.gameObject.CompareTag("House"))
+        if (collision.gameObject.CompareTag("Escudo") || collision.gameObject.CompareTag("Base"))
         {
             HP targetHealth = collision.gameObject.GetComponent<HP>();
             if (targetHealth != null)
