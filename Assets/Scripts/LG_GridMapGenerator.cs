@@ -4,8 +4,8 @@ using UnityEngine;
 public class LG_GridMapGenerator : MonoBehaviour
 {
     [Header("--- Dimensiones del Grid ---")]
-    public int width = 15;
-    public int height = 15;
+    public int width;
+    public int height;
     public float cellSize = 10f;
 
     [Header("--- Prefabs ---")]

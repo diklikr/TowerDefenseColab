@@ -7,7 +7,9 @@ public class LG_PlayerSanity : MonoBehaviour
 {
     [Header("--- Parámetros de Cordura ---")]
     [SerializeField] private float maxSanity = 100f;
+    [SerializeField] private float sanityPowerUP;
     [SerializeField] private float currentSanity;
+    [SerializeField] private float sanityPenalty;
 
     [Header("--- Drenaje y Regeneración ---")]
     [Tooltip("Drenaje pasivo por segundo al explorar/estar fuera de la base")]
@@ -159,5 +161,14 @@ public class LG_PlayerSanity : MonoBehaviour
         }
     }
 
+    public void AddMaxSanity()
+    {
+        maxSanity = maxSanity + sanityPowerUP;
+    }
+
+    public void RemoveSanity()
+    {
+        currentSanity = currentSanity - sanityPenalty;
+    }
 }
 

@@ -15,9 +15,15 @@ GameObject:
   - component: {fileID: 4432918467031299068}
   - component: {fileID: 5125106385772108964}
   - component: {fileID: 182657765701212539}
-  m_Layer: 0
+  - component: {fileID: 7258481816033844588}
+  - component: {fileID: 5583552204924039367}
+  - component: {fileID: 84210133371694815}
+  - component: {fileID: 2690111134193775415}
+  - component: {fileID: 569514135899437411}
+  - component: {fileID: 6345037012154884470}
+  m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,7 +149,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!20 &5125106385772108964
 Camera:
@@ -240,6 +246,126 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!143 &7258481816033844588
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998906346302829796}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5000002
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5583552204924039367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998906346302829796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081cba3d3f6b9804baa091a2f711fc96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
+  speed: 6
+  jumpHeight: 1.8
+  gravity: -9.81
+  mouseSensitivity: 0.7
+  cameraTransform: {fileID: 0}
+  groundCheck: {fileID: 0}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  sprintMultiplier: 1.6
+--- !u!114 &84210133371694815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998906346302829796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74616e9dc23069b4b96f6b0f4cf152db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuildSystem
+  wallPrefab: {fileID: 8087463993063650893, guid: 4d08130220a4c094285e6f9b979d32bb, type: 3}
+  buildPoint: {fileID: 7144191992517988316}
+  buildDistance: 5
+  playerCamera: {fileID: 0}
+--- !u!114 &2690111134193775415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998906346302829796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d60e046bfe86f4ba6f3fe367b071b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LG_PlayerSanity
+  maxSanity: 100
+  sanityPowerUP: 25
+  currentSanity: 0
+  sanityPenalty: 5
+  explorationDrainRate: 3
+  safeZoneRegenRate: 20
+  isInSafeZone: 0
+  isPenalized: 0
+  sanitySlider: {fileID: 0}
+  sanityFillImage: {fileID: 0}
+  sanityText: {fileID: 0}
+  normalColor: {r: 0.2, g: 0.8, b: 1, a: 1}
+  criticalColor: {r: 0.9, g: 0.1, b: 0.1, a: 1}
+  playerMovement: {fileID: 5583552204924039367}
+--- !u!114 &569514135899437411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998906346302829796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d92e367686805440aa9f71faf450052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LG_PlayerInteraction
+  interactKey: 101
+  promptTextUI: {fileID: 0}
+--- !u!114 &6345037012154884470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998906346302829796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d71fcaac0a19ce4bb03313cf77e2647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AtaqueArea
+  radio: 4
+  dano: 1
+  cooldown: 10
+  tecla: 32
 --- !u!1 &8131998709527236713
 GameObject:
   m_ObjectHideFlags: 0
