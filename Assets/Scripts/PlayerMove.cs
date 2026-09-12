@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMove : MonoBehaviour
@@ -23,8 +24,8 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
     }
 
     public void SetSpeedModifier(float modifier)
@@ -73,6 +74,7 @@ public class PlayerMove : MonoBehaviour
         float mouseY = Input.mousePositionDelta.y * mouseSensitivity;
 
         transform.Rotate(Vector3.up * mouseX);
+        //transform.Rotate(Vector3.forward * mouseY);
 
         pitch -= mouseY;
         pitch = Mathf.Clamp(pitch, -85f, 85f);

@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP
   sceneManage: {fileID: 0}
-  startHP: 3
+  startHP: 2
   currentHealth: 0
 --- !u!65 &3404994469594871212
 BoxCollider:
