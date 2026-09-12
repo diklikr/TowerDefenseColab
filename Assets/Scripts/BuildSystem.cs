@@ -33,7 +33,6 @@ public class BuildSystem : MonoBehaviour
 
     void TryUpgradeLookedWall()
     {
-        RaycastHit hit;
         Transform cam = playerCamera != null ? playerCamera : transform;
         
         bool hitSomething = false;

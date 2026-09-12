@@ -145,7 +145,7 @@ public class LG_PlayerSanity : MonoBehaviour
     // Detección de Base/Pilar (Zona Segura)
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("House"))
+        if (other.CompareTag("Base"))
         {
             isInSafeZone = true;
         }
@@ -153,7 +153,7 @@ public class LG_PlayerSanity : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("House"))
+        if (other.CompareTag("Base"))
         {
             isInSafeZone = false;
         }

@@ -6,7 +6,7 @@ public class LG_GridMapGenerator : MonoBehaviour
     [Header("--- Dimensiones del Grid ---")]
     public int width = 15;
     public int height = 15;
-    public float cellSize = 3f;
+    public float cellSize = 10f;
 
     [Header("--- Prefabs ---")]
     public GameObject basePrefab;
@@ -140,7 +140,7 @@ public class LG_GridMapGenerator : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(pos + Vector3.up * 10f, Vector3.down, out hit, 20f))
                 {
-                    pos.y = hit.point.y;
+                    pos.y = hit.point.y ;
                 }
 
                 CellType cell = grid[x, z];
@@ -169,8 +169,8 @@ public class LG_GridMapGenerator : MonoBehaviour
     private GameObject ChooseRandomResourcePrefab()
     {
         float rand = Random.value;
-        if (rand < 0.4f && woodNodePrefab != null) return woodNodePrefab;
-        if (rand < 0.8f && stoneNodePrefab != null) return stoneNodePrefab;
+        if (rand < 0.3f && woodNodePrefab != null) return woodNodePrefab;
+        if (rand < 0.6f && stoneNodePrefab != null) return stoneNodePrefab;
         return mudNodePrefab;
     }
 
