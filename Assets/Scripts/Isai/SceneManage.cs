@@ -19,8 +19,6 @@ public class SceneManage : MonoBehaviour
 
         if (panelGameOver != null) panelGameOver.SetActive(false);
         if (panelPausa != null) panelPausa.SetActive(false);
-
-        BloquearCursor(true);
     }
 
     private void Update()
@@ -69,6 +67,7 @@ public class SceneManage : MonoBehaviour
         juegoTerminado = true;
         Time.timeScale = 0f;
         BloquearCursor(false);
+        SceneManager.LoadScene("Win");
     }
 
     void BloquearCursor(bool jugando)

@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LG_ResourceNode
   resourceType: 0
-  amountPerHarvest: 1
-  totalStock: 5
+  amountPerHarvest: 2
+  totalStock: 35
   promptAction: Talar
 --- !u!1 &4635455181353130330
 GameObject:

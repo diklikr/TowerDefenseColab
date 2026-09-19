@@ -127,5 +127,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LG_ResourceNode
   resourceType: 1
   amountPerHarvest: 1
-  totalStock: 10
+  totalStock: 25
   promptAction: Picar

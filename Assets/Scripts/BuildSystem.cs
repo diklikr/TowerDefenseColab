@@ -25,7 +25,7 @@ public class BuildSystem : MonoBehaviour
         }
 
         // Tecla [ U ] o BotÃ³n Y / TriÃ¡ngulo del mando (JoystickButton3) para mejorar el muro al que estÃ¡s apuntando
-        if (Input.GetKeyDown(KeyCode.U) || Input.GetKeyDown(KeyCode.JoystickButton3))
+        if (Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.JoystickButton3))
         {
             TryUpgradeLookedWall();
         }
@@ -65,7 +65,7 @@ public class BuildSystem : MonoBehaviour
                 current = current.parent;
             }
 
-            // Si encontramos un objeto con el tag "Escudo" en la jerarquÃ­a
+            // Si encontramos un objeto con el tag "Escudo" en la jerarqu­a
             if (wallRoot != null)
             {
                 // Buscar componente LG_Wall en el objeto raÃ­z del muro
@@ -97,7 +97,7 @@ public class BuildSystem : MonoBehaviour
             // Nivel 2: Costo 2 Lodo, 1 Piedra
             if (LG_ResourceManager.Instance != null)
             {
-                if (LG_ResourceManager.Instance.ConsumeResources(0, 1, 2)) // Madera, Piedra, Lodo
+                if (LG_ResourceManager.Instance.ConsumeResources(0, 5, 5)) // Madera, Piedra, Lodo
                 {
                     LG_Wall.UpgradeToLevel(2);
                 }
@@ -112,7 +112,7 @@ public class BuildSystem : MonoBehaviour
             // Nivel 3: Costo 1 Piedra, 1 Lodo
             if (LG_ResourceManager.Instance != null)
             {
-                if (LG_ResourceManager.Instance.ConsumeResources(0, 1, 1)) // Madera, Piedra, Lodo
+                if (LG_ResourceManager.Instance.ConsumeResources(5, 10, 10)) // Madera, Piedra, Lodo
                 {
                     LG_Wall.UpgradeToLevel(3);
                 }
@@ -124,7 +124,7 @@ public class BuildSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("El muro ya estÃ¡ al nivel mÃ¡ximo (Nivel 3).");
+            Debug.Log("El muro ya esta al nivel maximo (Nivel 3).");
         }
     }
 
@@ -159,5 +159,11 @@ public class BuildSystem : MonoBehaviour
                 Debug.LogWarning("Recursos insuficientes para construir Muro Nivel 1 (2 Madera, 3 Piedra).");
             }
         }
+
+    }
+    private void OnDrawGizmos()
+    {
+        Transform cam = playerCamera != null ? playerCamera : transform;
+        Gizmos.DrawLine(cam.position, cam.forward);
     }
 }

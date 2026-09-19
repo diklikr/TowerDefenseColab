@@ -6,8 +6,8 @@ public class MenuInicial : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;   // por si venimos de una partida pausada
-        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void StartGame()
@@ -18,5 +18,10 @@ public class MenuInicial : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void StartMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
     }
 }

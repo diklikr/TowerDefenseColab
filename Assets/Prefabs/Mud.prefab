@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LG_ResourceNode
   resourceType: 2
   amountPerHarvest: 1
-  totalStock: 5
+  totalStock: 8
   promptAction: Recolectar
 --- !u!136 &2543691894014752126
 CapsuleCollider:
